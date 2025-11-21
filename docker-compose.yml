@@ -1,0 +1,11 @@
+version: "3.8"
+
+services:
+  web2:
+    image: sae2say/web2:latest
+    container_name: web2
+    env_file:
+      - .env
+    ports:
+      - "8080:8080"
+    restart: always
