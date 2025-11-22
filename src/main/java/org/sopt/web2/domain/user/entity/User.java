@@ -15,18 +15,16 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "native_language")
     private Language nativeLanguage;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "target_language")
     private Language targetLanguage;
 
-    @Column
-    private String job;
-
-    public User(Language nativeLanguage, Language targetLanguage, String job) {
+    public User(Language nativeLanguage, Language targetLanguage) {
         this.nativeLanguage = nativeLanguage;
         this.targetLanguage = targetLanguage;
-        this.job = job;
     }
 }
