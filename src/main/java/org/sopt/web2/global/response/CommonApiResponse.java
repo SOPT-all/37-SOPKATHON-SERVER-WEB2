@@ -18,6 +18,11 @@ public record CommonApiResponse<T> (
 		return new CommonApiResponse<>(basecode.getHttpStatus().value(), basecode.getMessage(), data);
 	}
 
+	//성공 응답, HttpStatus 직접 받음, message 직접 받음, 반환 데이터 있음
+	public static <T> CommonApiResponse<T> success(HttpStatus httpStatus, String message, T data) {
+		return new CommonApiResponse<>(httpStatus.value(), message, data);
+	}
+
 	//실패 응답, 반환 데이터 없음
 	public static <T> CommonApiResponse<T> fail(BaseCode basecode) {
 		return new CommonApiResponse<>(basecode.getHttpStatus().value(), basecode.getMessage(), null);
