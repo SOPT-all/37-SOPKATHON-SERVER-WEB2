@@ -33,12 +33,33 @@ public class MatchingService {
 
         User me = myWish.getUser();
 
-        List<Wish> partnerWishOpt = wishRepository.findMatchingWish(
-                myWish.getId(),
-                myWish.getLocation(),
-                myWish.getTimeSlot(),
-                myWish.getJob()
-        );
+        List<Wish> partnerWishOpt;
+
+        // 1. 원하는 직업이 있으면 직업 포함해서 먼저 검색
+        if (myWish.getJob() != null) {
+            partnerWishOpt = wishRepository.findMatchingWishWithJob(
+                    myWish.getId(),
+                    myWish.getLocation(),
+                    myWish.getTimeSlot(),
+                    myWish.getJob()
+            );
+
+            // 2. 직업 매칭 결과 없으면 직업 제외하고 재검색
+            if (partnerWishOpt.isEmpty()) {
+                partnerWishOpt = wishRepository.findMatchingWishWithoutJob(
+                        myWish.getId(),
+                        myWish.getLocation(),
+                        myWish.getTimeSlot()
+                );
+            }
+        } else {
+            // 원하는 직업 없으면 바로 장소/시간만 검색
+            partnerWishOpt = wishRepository.findMatchingWishWithoutJob(
+                    myWish.getId(),
+                    myWish.getLocation(),
+                    myWish.getTimeSlot()
+            );
+        }
 
         if (partnerWishOpt.isEmpty()) {
             return null;
