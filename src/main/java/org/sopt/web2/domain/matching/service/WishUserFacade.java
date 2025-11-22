@@ -28,9 +28,9 @@ public class WishUserFacade {
 
 	@Transactional
 	public WishResponse saveWishAndPatchUser(WishRequest request) {
-		Wish wish = wishRepository.save(new Wish(findById(1L), request.location(), request.timeSlot()));
+		Wish wish = wishRepository.save(new Wish(findById(1L), request.location(), request.timeSlot(), request.job()));
 
-		userRepository.patchUserByUserId(1L, request.nativeLanguage(), request.targetLanguage(), request.job());
+		userRepository.patchUserByUserId(1L, request.nativeLanguage(), request.targetLanguage());
 		return WishResponse.of(wish.getId(), wish.getLocation(), wish.getTimeSlot());
 	}
 

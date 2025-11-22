@@ -1,7 +1,7 @@
 package org.sopt.web2.domain.user.controller;
 
 import org.sopt.web2.domain.user.controller.dto.UserInfoResponse;
-import org.sopt.web2.domain.user.service.UserService;
+import org.sopt.web2.domain.user.service.UserWishFacade;
 import org.sopt.web2.global.response.CommonApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,11 +16,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UserController {
 
-	private final UserService userService;
+	private final UserWishFacade userWishFacade;
 
 	@GetMapping("/onboarding")
 	public ResponseEntity<CommonApiResponse<UserInfoResponse>> getUserInfo() {
-		UserInfoResponse response = userService.getUserInfo(1L);
+		UserInfoResponse response = userWishFacade.getUserInfo(1L);
 		return ResponseEntity.ok()
 			.body(CommonApiResponse.success(HttpStatus.OK, "정보 작성 기록이 조회되었습니다.", response));
 	}

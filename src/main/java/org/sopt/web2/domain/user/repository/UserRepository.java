@@ -14,16 +14,14 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	@Modifying
 	@Query("""
         UPDATE User u
-        SET 
+        SET
             u.nativeLanguage = :nativeLanguage,
-            u.targetLanguage = :targetLanguage,
-            u.job = :job
+            u.targetLanguage = :targetLanguage
         WHERE u.id = :userId
     """)
 	void patchUserByUserId(
 		@Param("userId") Long userId,
 		@Param("nativeLanguage") Language nativeLanguage,
-		@Param("targetLanguage") Language targetLanguage,
-		@Param("job") String job
+		@Param("targetLanguage") Language targetLanguage
 	);
 }
