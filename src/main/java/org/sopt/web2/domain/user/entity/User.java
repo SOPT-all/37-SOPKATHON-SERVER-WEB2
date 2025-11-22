@@ -15,12 +15,12 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "native_language")
+    @Enumerated(EnumType.STRING)
     private Language nativeLanguage;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "target_language")
+    @Enumerated(EnumType.STRING)
     private Language targetLanguage;
 
     public User(Language nativeLanguage, Language targetLanguage) {

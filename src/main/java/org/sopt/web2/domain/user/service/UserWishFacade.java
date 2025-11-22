@@ -9,31 +9,33 @@ import org.sopt.web2.domain.user.exception.UserErrorCode;
 import org.sopt.web2.domain.user.repository.UserRepository;
 import org.sopt.web2.global.exception.BusinessException;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
+
 
 @Component
 @RequiredArgsConstructor
 public class UserWishFacade {
 
-	private final WishRepository wishRepository;
-	private final UserRepository userRepository;
+    private final WishRepository wishRepository;
+    private final UserRepository userRepository;
 
-	public UserInfoResponse getUserInfo(Long userId) {
-		User user = userRepository.findById(userId)
-			.orElseThrow(()-> new BusinessException(UserErrorCode.USER_NOT_FOUND));
+    public UserInfoResponse getUserInfo(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(()-> new BusinessException(UserErrorCode.USER_NOT_FOUND));
 
-		return UserInfoResponse.of(
-			user.getNativeLanguage(),
-			user.getTargetLanguage(),
-			getLastWishJob(userId)
-		);
-	}
+        return UserInfoResponse.of(
+                user.getNativeLanguage(),
+                user.getTargetLanguage(),
+                getLastWishJob(userId)
+        );
+    }
 
-	private String getLastWishJob(Long userId) {
-		Wish wish = wishRepository.findTopByUserIdOrderByIdDesc(userId)
-			.orElseThrow(()-> new BusinessException(WishErrorCode.WISH_NOT_FOUND));
+    private String getLastWishJob(Long userId) {
+        Wish wish = wishRepository.findTopByUserIdOrderByIdDesc(userId)
+                .orElseThrow(()-> new BusinessException(WishErrorCode.WISH_NOT_FOUND));
 
-		return wish.getJob();
-	}
+        return wish.getJob();
+    }
 }
