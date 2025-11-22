@@ -20,13 +20,26 @@ public interface WishRepository extends JpaRepository<Wish, Long> {
         WHERE w.id != :wishId
         AND w.location = :location
         AND w.timeSlot = :timeSlot
-        AND (:job IS NULL OR w.job IS NULL OR w.job = :job)
+        AND (:job IS NULL OR w.user.job = :job)
         """)
-    List<Wish> findMatchingWish(
+    List<Wish> findMatchingWishWithJob(
             @Param("wishId") Long wishId,
             @Param("location") String location,
             @Param("timeSlot") String timeSlot,
             @Param("job") String job
+    );
+
+    @Query("""
+        SELECT w FROM Wish w
+        WHERE w.id != :wishId
+        AND w.location = :location
+        AND w.timeSlot = :timeSlot
+        ORDER BY w.id ASC
+        """)
+    List<Wish> findMatchingWishWithoutJob(
+            @Param("wishId") Long wishId,
+            @Param("location") String location,
+            @Param("timeSlot") String timeSlot
     );
 
 	Optional<Wish> findTopByUserIdOrderByIdDesc(Long userId);
