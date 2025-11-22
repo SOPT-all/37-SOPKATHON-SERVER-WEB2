@@ -15,18 +15,16 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
-    @JoinColumn(name = "native_language")
-    private String nativeLanguage;
+    @Column(name = "native_language")
+    private Language nativeLanguage;
 
-    @Column
-    @JoinColumn(name = "target_language")
-    private String targetLanguage;
+    @Column(name = "target_language")
+    private Language targetLanguage;
 
     @Column
     private String job;
 
-    public User(String nativeLanguage, String targetLanguage, String job) {
+    public User(Language nativeLanguage, Language targetLanguage, String job) {
         this.nativeLanguage = nativeLanguage;
         this.targetLanguage = targetLanguage;
         this.job = job;

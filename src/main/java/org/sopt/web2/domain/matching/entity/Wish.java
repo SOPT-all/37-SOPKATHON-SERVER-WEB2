@@ -22,8 +22,7 @@ public class Wish {
     @Column
     private String location;
 
-    @Column
-    @JoinColumn(name = "time_slot")
+    @Column(name = "time_slot")
     private String timeSlot;
 
     public Wish(User user, String location, String timeSlot) {

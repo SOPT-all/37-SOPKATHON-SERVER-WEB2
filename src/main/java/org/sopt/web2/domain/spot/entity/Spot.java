@@ -14,8 +14,7 @@ public class Spot {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
-    @JoinColumn(name = "spot_name")
+    @Column(name = "spot_name")
     private String spotName;
 
     public Spot(String spotName) {
