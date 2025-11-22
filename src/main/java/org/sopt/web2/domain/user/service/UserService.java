@@ -20,8 +20,8 @@ public class UserService {
 			.orElseThrow(()-> new BusinessException(UserErrorCode.USER_NOT_FOUND));
 		return UserInfoResponse.of(
 			user.getNativeLanguage(),
-			user.getTargetLanguage(),
-			user.getJob()
+			user.getTargetLanguage()
+		//	user.getJob()
 		);
 	}
 }

@@ -25,9 +25,13 @@ public class Wish {
     @Column(name = "time_slot")
     private String timeSlot;
 
-    public Wish(User user, String location, String timeSlot) {
+    @Column
+    private String job;
+
+    public Wish(User user, String location, String timeSlot, String job) {
         this.user = user;
         this.location = location;
         this.timeSlot = timeSlot;
+        this.job = job;
     }
 }
