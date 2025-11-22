@@ -25,7 +25,7 @@ public class Wish {
     @Column(name = "time_slot")
     private String timeSlot;
 
-    @Column
+    @Column(name = "job")
     private String job;
 
     public Wish(User user, String location, String timeSlot, String job) {

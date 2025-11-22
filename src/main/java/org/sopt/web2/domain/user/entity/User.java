@@ -23,15 +23,8 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Language targetLanguage;
 
-    /*
-    @Column
-    private String job;
-
-     */
-
     public User(Language nativeLanguage, Language targetLanguage) {
         this.nativeLanguage = nativeLanguage;
         this.targetLanguage = targetLanguage;
-        //this.job = job;
     }
 }
